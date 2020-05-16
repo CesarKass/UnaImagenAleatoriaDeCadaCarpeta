@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 $ruta="G:/ejemplo";
 //Variable para almacenar nombres de las carpetas
 //Variable to store folder names
-$nombreCarpeta="vacio";
+$nombreCarpeta="";
 //Contador del arreglo
 //Array counter
 $i = 0;
@@ -38,20 +38,17 @@ function unArchivoAleatorioDeCadaCarpeta($ruta,$nombreCarpeta){
     }
     //escojemos un archivo al azar con el nombre de su respectiva carpeta
     // let's choose a file at random with the name of its respective folder
-    $GLOBALS["fic"][$GLOBALS["i"]] = array($nombreCarpeta=> $GLOBALS["pila"] [array_rand($GLOBALS["pila"])]);
-    //borramos el directorio "vacio" ya que no nos sirve
-    // delete the "empty" directory since it does not work for us
-    $search_array=$GLOBALS["fic"][$GLOBALS["i"]];
-    if(array_key_exists('vacio',$search_array)){
-        unset($GLOBALS["fic"][$GLOBALS["i"]]);
-    }
-    else{
-        //seguimos con el siguiente directorio
-        // we continue with the following directory
-        $GLOBALS["i"]++;
-    }
+    $GLOBALS["fic"][$GLOBALS["i"]] = 
+    array(
+        "breed" => $nombreCarpeta,
+        "image" => $GLOBALS["pila"] [array_rand($GLOBALS["pila"])]
+    );
+    $GLOBALS["i"]++;
 }
 //Llamamos a la funcion e imprimimos el JSON
 // We call the function and print the JSON
 unArchivoAleatorioDeCadaCarpeta($ruta,$nombreCarpeta);
+    //borramos el directorio "" ya que no nos sirve
+    // delete the "" directory since it does not work for us
+    unset($fic[$i-1]);
 print_r(json_encode($fic,JSON_PRETTY_PRINT)); 
